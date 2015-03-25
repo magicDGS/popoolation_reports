@@ -36,7 +36,13 @@ if(length(args[o_pos]) == 0) {
     outprefix <- args[o_pos]
 }
 
-WORKING_DIRECTORY <- paste(WD, dirname(outprefix), sep="/")
+# absolute path
+if(substr(outputprefix, 1, 1) == "/") {
+    WORKING_DIRECTORY <- dirname(outprefix)
+} else {
+    WORKING_DIRECTORY <- paste(WD, dirname(outprefix), sep="/")
+}
+
 dir.create(WORKING_DIRECTORY, F)
 
 cat("Checking and installing needed packages\n", file=stderr())
