@@ -11,7 +11,7 @@ use in other programs inputs).
 
 Already implemented scripts:
 
-* [reportTheta.R]() : Reports Watterson's theta for a single file. 
+* [reportTheta.R](https://github.com/magicDGS/popoolation_reports/blob/master/reportTheta/reportTheta.R) : Reports Watterson's theta for a single file. 
 
 ---
 
