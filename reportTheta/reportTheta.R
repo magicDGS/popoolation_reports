@@ -37,7 +37,7 @@ if(length(args[o_pos]) == 0) {
 }
 
 # absolute path
-if(substr(outputprefix, 1, 1) == "/") {
+if(substr(outprefix, 1, 1) == "/") {
     WORKING_DIRECTORY <- dirname(outprefix)
 } else {
     WORKING_DIRECTORY <- paste(WD, dirname(outprefix), sep="/")
