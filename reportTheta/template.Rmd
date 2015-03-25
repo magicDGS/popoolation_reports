@@ -5,14 +5,7 @@ output: pdf_document
 ---
 
 ```{r, echo=FALSE}
-# Checking enviroment
-if(!exists("input") | !exists("threshold")) {
-    cat("Error: No input or threshold set in enviroment")
-    q("n")
-    }
-```
-
-```{r, echo=FALSE}
+setwd(WD)
 dataset <- read.delim(input, header = F, sep = "\t", dec = ".", na.strings=c("", "na"))
 colnames(dataset) <- c("Ref_scaf", "Position", "SNPs", "Frac", "Theta")
 dataset$Theta[ dataset$Frac < threshold ] <- NA
@@ -43,11 +36,10 @@ Number of windows not included: `r NAwin`
 ```{r, echo=FALSE, warning=FALSE}
 p <- ggplot(data=dataset) + 
     geom_line(aes(x=Position, y=Theta)) +
-    # geom_point(aes(x=Position, y=Theta), size=5) + 
     geom_hline(aes(yintercept=meanTheta), col="red", linetype = "longdash") +
     facet_grid(~Ref_scaf, scales = "free_x") +
     labs(x="Chr. Position", y=expression(theta[w])) +
-    theme_classic() #+ theme(text = element_text(size=18))
+    theme_classic()
 p
 ```
 
@@ -58,7 +50,7 @@ p
 p <- ggplot(data=dataset) + 
     geom_histogram(aes(x=SNPs), fill="white", col="black", binwidth = diff(range(dataset$SNPs))/30) +
     labs(x="Number of SNPs") +
-    theme_classic() #+ theme(text = element_text(size=18))
+    theme_classic()
 p
 ```
 
