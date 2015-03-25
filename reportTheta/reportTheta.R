@@ -1,6 +1,7 @@
 ## Needs ThetaReport.Rmd
 
-args <- commandArgs(F)
+args <- commandArgs(FALSE)
+
 script.basename <- dirname(sub("--file=", "", args[grep("--file=", args)]))
 reportRmd <- paste(script.basename, "template.Rmd", sep="/")
 WD <- getwd()
@@ -9,8 +10,8 @@ usage <- function() {
     cat("Usage: Rscript thetaReport.R -i <infile> -t <threshold> [-o outprefix]
 \tinfile\t\tTab delimited file from Popoolation theta calculation
 \tthreshold\tMinimum proportion of the windows covered
-\toutprefix\t\tPrefix to store the results (default: infile). Generates a .pdf report and .mean with the mean value\n"
-    , file=stderr())
+\toutprefix\t\tPrefix to store the results (default: infile). Generates a .pdf report and .mean with the mean value\n",
+    file=stderr())
 }
 
 i_pos <- grep("-i", args) + 1
@@ -62,11 +63,11 @@ output <- paste(outprefix, "pdf", sep=".")
 tryCatch(
     { render(input = reportRmd, output_format = "pdf_document", output_file = output, output_dir = WORKING_DIRECTORY, ) },
     error = function(e) {
-        cat("Error:\t")
-        cat(e$message)
-        cat("\n")
+        cat("Error:\t", file=stderr())
+        cat(e$message, file=stderr())
+        cat("\n", file=stderr())
         if(e$message == "pandoc version 1.12.3 or higher is required and was not found.") {
-            cat("\tsee https://github.com/rstudio/rmarkdown/blob/master/PANDOC.md\n")
+            cat("\tsee https://github.com/rstudio/rmarkdown/blob/master/PANDOC.md\n", file=stderr())
         }
         q("no")
     }
