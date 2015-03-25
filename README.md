@@ -34,6 +34,7 @@ The scripts check the R packages dependencies and try to install them. Pandoc sh
   - ggplot2
   - rmarkdown
 * Pandoc: see [RStudio Installing PANDOC](https://github.com/rstudio/rmarkdown/blob/master/PANDOC.md)
+* LaTex support for your platform
 
 ---
 
